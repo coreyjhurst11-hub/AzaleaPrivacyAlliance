@@ -223,6 +223,26 @@
   .involve-card h3{font-size:1.1rem;}
   .involve-card p{color:var(--ink-soft); font-size:0.92rem;}
 
+  .rep-panel{max-width:1000px; margin:56px auto 0; text-align:left;}
+  .rep-group{margin-bottom:38px;}
+  .rep-group:last-child{margin-bottom:0;}
+  .rep-group h4{
+    font-size:0.78rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--azalea); margin:0 0 16px;
+  }
+  .rep-list{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+  @media (max-width:640px){.rep-list{grid-template-columns:1fr;}}
+  .rep-item{
+    background:rgba(255,255,255,0.04); border:1px solid var(--line-dark); border-radius:12px;
+    padding:16px 18px;
+  }
+  .rep-item .rep-name{font-weight:700; color:#fff; font-size:1rem; margin-bottom:2px;}
+  .rep-item .rep-title{color:rgba(255,255,255,0.68); font-size:0.86rem; margin-bottom:10px;}
+  .rep-item .rep-contact{display:flex; flex-wrap:wrap; gap:14px;}
+  .rep-item a{color:#ff7a95; font-weight:600; font-size:0.9rem; text-decoration:none;}
+  .rep-item a:hover{text-decoration:underline;}
+  .rep-note{font-size:0.85rem; color:rgba(255,255,255,0.6); margin-top:22px; text-align:center;}
+
   .contact-email{
     display:inline-flex; align-items:center; gap:10px; margin-top:10px;
     font-weight:600; color:#fff; text-decoration:none; font-size:1.15rem;
@@ -445,13 +465,106 @@
         </div>
         <div class="involve-card">
           <h3>Contact your representative</h3>
-          <p>Tell the City Council and Board of Commissioners directly that you support these safeguards.</p>
+          <p>Tell the City Council, Board of Commissioners, and state legislators directly that you support these safeguards. Full contact list below.</p>
         </div>
         <div class="involve-card">
           <h3>Contact us</h3>
           <p>Questions about the petition, the letters, or joining the Alliance.</p>
           <a class="contact-email" href="mailto:untrackedandfree@gmail.com">untrackedandfree@gmail.com</a>
         </div>
+      </div>
+
+      <div class="rep-panel">
+        <div class="rep-group">
+          <h4>City of Thomaston — Mayor &amp; Council</h4>
+          <ul class="rep-list">
+            <li class="rep-item">
+              <div class="rep-name">Mayor J.D. Stallings</div>
+              <div class="rep-title">Mayor</div>
+              <div class="rep-contact"><a href="tel:7069758704">706-975-8704</a></div>
+            </li>
+            <li class="rep-item">
+              <div class="rep-name">Troy Chaney</div>
+              <div class="rep-title">Mayor Pro-Tem</div>
+              <div class="rep-contact"><a href="tel:7067416183">706-741-6183</a></div>
+            </li>
+            <li class="rep-item">
+              <div class="rep-name">Don Greathouse</div>
+              <div class="rep-title">Councilmember</div>
+              <div class="rep-contact"><a href="tel:7069752541">706-975-2541</a></div>
+            </li>
+            <li class="rep-item">
+              <div class="rep-name">Jeff Middlebrooks</div>
+              <div class="rep-title">Councilmember</div>
+              <div class="rep-contact"><a href="tel:7066479691">706-647-9691</a></div>
+            </li>
+            <li class="rep-item">
+              <div class="rep-name">Lakeitha Reeves</div>
+              <div class="rep-title">Councilmember</div>
+              <div class="rep-contact"><a href="tel:7066477771">706-647-7771</a></div>
+            </li>
+            <li class="rep-item">
+              <div class="rep-name">Ryan Tucker</div>
+              <div class="rep-title">Councilmember</div>
+              <div class="rep-contact"><a href="tel:4044068679">404-406-8679</a></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rep-group">
+          <h4>Upson County Board of Commissioners</h4>
+          <ul class="rep-list">
+            <li class="rep-item">
+              <div class="rep-name">Dan Brue</div>
+              <div class="rep-title">Chairman, Commissioner at Large</div>
+              <div class="rep-contact"><a href="tel:7066465471">706-646-5471</a></div>
+            </li>
+            <li class="rep-item">
+              <div class="rep-name">Christopher Biggs</div>
+              <div class="rep-title">District 1 Commissioner</div>
+              <div class="rep-contact"><a href="tel:7066465471">706-646-5471</a></div>
+            </li>
+            <li class="rep-item">
+              <div class="rep-name">James Ellington</div>
+              <div class="rep-title">District 2 Commissioner</div>
+              <div class="rep-contact"><a href="tel:7064273183">706-427-3183</a></div>
+            </li>
+            <li class="rep-item">
+              <div class="rep-name">Paul Jones</div>
+              <div class="rep-title">District 3 Commissioner</div>
+              <div class="rep-contact"><a href="tel:7066477012">706-647-7012</a></div>
+            </li>
+            <li class="rep-item">
+              <div class="rep-name">Benjamin Watson</div>
+              <div class="rep-title">District 4 Commissioner, Vice Chairman</div>
+              <div class="rep-contact"><a href="tel:7066465471">706-646-5471</a></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rep-group">
+          <h4>State Legislators</h4>
+          <ul class="rep-list">
+            <li class="rep-item">
+              <div class="rep-name">Sen. Steven McNeel</div>
+              <div class="rep-title">Georgia State Senate, District 18</div>
+              <div class="rep-contact">
+                <a href="tel:4044632593">404-463-2593</a>
+                <a href="mailto:steven.mcneel@senate.ga.gov">Email</a>
+              </div>
+            </li>
+            <li class="rep-item">
+              <div class="rep-name">Rep. Robert Dickey</div>
+              <div class="rep-title">Georgia House of Representatives, District 134</div>
+              <div class="rep-contact">
+                <a href="tel:4046565099">404-656-5099</a>
+                <a href="mailto:robert.dickey@house.ga.gov">Email</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <p class="rep-note">Contact information current as of publication. Verify against upsoncountyga.org and cityofthomaston.com before major outreach.</p>
       </div>
 
       <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="form-card" style="margin-top:48px; text-align:left;">
