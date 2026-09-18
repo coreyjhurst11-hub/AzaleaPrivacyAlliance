@@ -1,0 +1,12 @@
+{
+  "name": "azalea-privacy-alliance",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Azalea Privacy Alliance homepage — static site",
+  "scripts": {
+    "start": "serve -s . -l $PORT"
+  },
+  "dependencies": {
+    "serve": "^14.2.3"
+  }
+}
