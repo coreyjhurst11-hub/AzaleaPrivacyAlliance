@@ -177,22 +177,24 @@
   }
   .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px;}
   @media (max-width:600px){.form-grid{grid-template-columns:1fr;}}
-  .field{display:flex; flex-direction:column; gap:8px;}
+  .field{display:flex; flex-direction:column; gap:9px;}
   .field.full{grid-column:1/-1;}
-  .field-label{font-size:0.82rem; font-weight:600; color:var(--ink-soft-dark); letter-spacing:0.01em;}
+  .field-label{font-size:0.98rem; font-weight:700; color:#fff; letter-spacing:0.01em;}
+  .form-card.light .field-label{color:#000;}
   input, textarea, select{
-    font-family:inherit; font-size:1rem; padding:13px 15px;
+    font-family:inherit; font-size:1.08rem; padding:14px 16px; line-height:1.4;
     border:1px solid var(--line-dark); border-radius:10px;
-    background:rgba(255,255,255,0.05); color:#fff;
+    background:rgba(255,255,255,0.07); color:#fff;
   }
   .form-card.light input, .form-card.light textarea, .form-card.light select{
     background:#fff; border-color:var(--line-light); color:#000;
   }
-  input::placeholder, textarea::placeholder{color:rgba(255,255,255,0.35);}
+  input::placeholder, textarea::placeholder{color:rgba(255,255,255,0.45);}
   input:focus, textarea:focus, select:focus{outline:2px solid var(--azalea); outline-offset:1px;}
-  .consent{display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:var(--ink-soft);}
-  .consent input{width:auto; margin-top:3px;}
-  .form-note{font-size:0.85rem; color:var(--ink-soft); margin-top:20px; text-align:center;}
+  .consent{display:flex; align-items:flex-start; gap:12px; font-size:1.02rem; line-height:1.5; color:#fff;}
+  .form-card.light .consent{color:#000;}
+  .consent input{width:auto; margin-top:4px; transform:scale(1.2);}
+  .form-note{font-size:0.95rem; color:rgba(255,255,255,0.75); margin-top:20px; text-align:center; line-height:1.5;}
   .form-card.light .form-note{color:var(--ink-soft-dark);}
   .form-status{font-size:0.9rem; margin-top:16px; font-weight:600; display:none; text-align:center;}
   .form-status.success{display:block; color:#4ADE80;}
