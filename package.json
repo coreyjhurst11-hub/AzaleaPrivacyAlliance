@@ -4,7 +4,7 @@
   "private": true,
   "description": "Azalea Privacy Alliance homepage — static site",
   "scripts": {
-    "start": "serve -s . -l $PORT"
+    "start": "serve . -l $PORT"
   },
   "dependencies": {
     "serve": "^14.2.3"
