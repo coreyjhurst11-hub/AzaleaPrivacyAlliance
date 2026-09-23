@@ -645,7 +645,7 @@
             <button type="submit" class="btn btn-primary">Continue to secure checkout</button>
           </div>
           <p class="form-status" id="donateStatus"></p>
-          <p class="form-note">You'll complete payment on our secure checkout page. This form reserves your shirt size and shipping details.</p>
+          <p class="form-note">You'll be taken to Stripe's secure checkout to complete your $35 payment right after submitting this form.</p>
         </form>
       </div>
     </div>
@@ -849,7 +849,7 @@
     });
   });
 
-  function wireForm(formId, statusId, successMsg){
+  function wireForm(formId, statusId, successMsg, redirectUrl){
     var form = document.getElementById(formId);
     var status = document.getElementById(statusId);
     if(!form) return;
@@ -867,6 +867,11 @@
           status.textContent = successMsg;
           status.className = 'form-status success';
           form.reset();
+          if(redirectUrl){
+            setTimeout(function(){
+              window.location.href = redirectUrl;
+            }, 900);
+          }
         } else {
           status.textContent = 'Something went wrong — please try again or email us directly.';
           status.className = 'form-status error';
@@ -878,7 +883,7 @@
     });
   }
   wireForm('petitionForm', 'petitionStatus', 'Thank you — your signature has been added.');
-  wireForm('donateForm', 'donateStatus', 'Thanks! We\'ve reserved your details — check your email for the checkout link.');
+  wireForm('donateForm', 'donateStatus', 'Thanks! Taking you to secure checkout…', 'https://buy.stripe.com/aFa14g7HF0RP3Gk68EaEE00');
   wireForm('contactForm', 'contactStatus', 'Message sent — we\'ll get back to you soon.');
 </script>
 
