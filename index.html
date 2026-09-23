@@ -642,7 +642,7 @@
             <button type="submit" class="btn btn-primary">Continue to secure checkout</button>
           </div>
           <p class="form-status" id="donateStatus"></p>
-          <p class="form-note">You'll be taken to Stripe's secure checkout to complete your $35 payment right after submitting this form.</p>
+          <p class="form-note">Stripe's secure checkout will open in a new tab right after you submit this form, so you can complete your $35 payment.</p>
         </form>
       </div>
     </div>
@@ -841,7 +841,7 @@
           form.reset();
           if(redirectUrl){
             setTimeout(function(){
-              window.location.href = redirectUrl;
+              window.open(redirectUrl, '_blank');
             }, 900);
           }
         } else {
