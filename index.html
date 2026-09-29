@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <style>
   :root{
     color-scheme: light;
@@ -23,7 +24,7 @@
     --pine:#1F3A2E;
     --line-dark: rgba(255,255,255,0.14);
     --line-light: rgba(10,10,10,0.1);
-    --max: 1120px;
+    --max: 1220px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -56,14 +57,14 @@
   }
   .nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding:12px 28px;
+    padding:12px 24px; gap:16px;
     max-width:var(--max); margin:0 auto;
   }
   .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff;}
   .brand img{width:42px; height:42px; border-radius:8px; object-fit:cover; flex-shrink:0;}
   .brand-text{font-weight:600; font-size:0.95rem; letter-spacing:-0.01em;}
-  nav.links{display:flex; gap:32px;}
-  nav.links a{color:rgba(255,255,255,0.85); text-decoration:none; font-weight:500; font-size:0.88rem; transition:color .2s;}
+  nav.links{display:flex; gap:18px; flex-wrap:wrap; justify-content:flex-end;}
+  nav.links a{color:rgba(255,255,255,0.85); text-decoration:none; font-weight:500; font-size:0.82rem; white-space:nowrap; transition:color .2s;}
   nav.links a:hover{color:#fff;}
   .nav-toggle{display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#fff;}
   @media (max-width:800px){
@@ -178,6 +179,30 @@
   .video-embed iframe{
     position:absolute; top:0; left:0; width:100%; height:100%; border:0;
   }
+
+  .map-grid{display:grid; grid-template-columns:340px 1fr; gap:28px; align-items:start; max-width:1100px; margin:0 auto;}
+  @media (max-width:900px){.map-grid{grid-template-columns:1fr;}}
+  .map-controls{background:var(--paper); border:1px solid var(--line-light); border-radius:16px; padding:24px;}
+  .map-controls label{display:block; font-weight:700; font-size:0.9rem; margin-bottom:8px;}
+  .county-select{
+    width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line-light);
+    background:#fff; font-family:inherit; font-size:1rem; color:var(--black); margin-bottom:20px;
+  }
+  .map-officials{border-top:1px solid var(--line-light); padding-top:16px;}
+  .map-officials h4{font-size:1rem; margin:0 0 10px;}
+  .map-officials .official-line{font-size:0.9rem; margin-bottom:8px; line-height:1.4;}
+  .map-officials .official-line strong{display:block;}
+  .map-officials a{color:var(--azalea); font-weight:600; text-decoration:none; font-size:0.88rem;}
+  .map-officials a:hover{text-decoration:underline;}
+  .map-officials .unverified{font-size:0.88rem; color:var(--ink-soft-dark); line-height:1.5;}
+  .map-note{font-size:0.75rem; color:var(--ink-soft-dark); margin-top:16px; line-height:1.5;}
+  #leafletMap{
+    height:560px; border-radius:16px; overflow:hidden;
+    box-shadow:0 24px 56px -22px rgba(10,10,10,0.25); border:1px solid var(--line-light);
+    background:var(--paper);
+  }
+  @media (max-width:600px){#leafletMap{height:420px;}}
+  .map-status{font-size:0.85rem; color:var(--ink-soft-dark); margin-top:10px; text-align:center;}
 
   .flock-check{
     max-width:780px; margin:0 auto; text-align:center;
@@ -351,6 +376,7 @@
       <a href="#news">Breaking News</a>
       <a href="#donate">Donate</a>
       <a href="#contact">Contact</a>
+      <a href="#camera-map">GA Camera Map</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
   </div>
@@ -867,6 +893,31 @@
     </div>
   </section>
 
+  <section id="camera-map">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="section-eyebrow">STATEWIDE TRANSPARENCY</p>
+        <h2>Flock cameras across Georgia.</h2>
+        <p>Select or click a county to zoom in and see reported camera locations there, pulled live from OpenStreetMap's public database. We're also building a verified directory of county and city officials, county by county.</p>
+      </div>
+      <div class="map-grid">
+        <div class="map-controls">
+          <label for="countySelect">Jump to a county</label>
+          <select id="countySelect" class="county-select"></select>
+          <div class="map-officials" id="officialsPanel">
+            <h4 id="officialsCountyName">Upson County</h4>
+            <div id="officialsContent"></div>
+          </div>
+          <p class="map-note">Camera locations are crowdsourced by volunteer OpenStreetMap contributors (the DeFlock project) — not Flock, the Alliance, or any government agency. Pins may be missing, outdated, or misplaced. Know a county's officials? Email <a href="mailto:untrackedandfree@gmail.com">untrackedandfree@gmail.com</a> and we'll verify and add them.</p>
+        </div>
+        <div>
+          <div id="leafletMap"></div>
+          <p class="map-status" id="mapStatus"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -928,5 +979,283 @@
   wireForm('contactForm', 'contactStatus', 'Message sent — we\'ll get back to you soon.');
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  var GA_COUNTIES = [
+    {name:"Appling", fips:"13001"},
+    {name:"Atkinson", fips:"13003"},
+    {name:"Bacon", fips:"13005"},
+    {name:"Baker", fips:"13007"},
+    {name:"Baldwin", fips:"13009"},
+    {name:"Banks", fips:"13011"},
+    {name:"Barrow", fips:"13013"},
+    {name:"Bartow", fips:"13015"},
+    {name:"Ben Hill", fips:"13017"},
+    {name:"Berrien", fips:"13019"},
+    {name:"Bibb", fips:"13021"},
+    {name:"Bleckley", fips:"13023"},
+    {name:"Brantley", fips:"13025"},
+    {name:"Brooks", fips:"13027"},
+    {name:"Bryan", fips:"13029"},
+    {name:"Bulloch", fips:"13031"},
+    {name:"Burke", fips:"13033"},
+    {name:"Butts", fips:"13035"},
+    {name:"Calhoun", fips:"13037"},
+    {name:"Camden", fips:"13039"},
+    {name:"Candler", fips:"13043"},
+    {name:"Carroll", fips:"13045"},
+    {name:"Catoosa", fips:"13047"},
+    {name:"Charlton", fips:"13049"},
+    {name:"Chatham", fips:"13051"},
+    {name:"Chattahoochee", fips:"13053"},
+    {name:"Chattooga", fips:"13055"},
+    {name:"Cherokee", fips:"13057"},
+    {name:"Clarke", fips:"13059"},
+    {name:"Clay", fips:"13061"},
+    {name:"Clayton", fips:"13063"},
+    {name:"Clinch", fips:"13065"},
+    {name:"Cobb", fips:"13067"},
+    {name:"Coffee", fips:"13069"},
+    {name:"Colquitt", fips:"13071"},
+    {name:"Columbia", fips:"13073"},
+    {name:"Cook", fips:"13075"},
+    {name:"Coweta", fips:"13077"},
+    {name:"Crawford", fips:"13079"},
+    {name:"Crisp", fips:"13081"},
+    {name:"Dade", fips:"13083"},
+    {name:"Dawson", fips:"13085"},
+    {name:"DeKalb", fips:"13089"},
+    {name:"Decatur", fips:"13087"},
+    {name:"Dodge", fips:"13091"},
+    {name:"Dooly", fips:"13093"},
+    {name:"Dougherty", fips:"13095"},
+    {name:"Douglas", fips:"13097"},
+    {name:"Early", fips:"13099"},
+    {name:"Echols", fips:"13101"},
+    {name:"Effingham", fips:"13103"},
+    {name:"Elbert", fips:"13105"},
+    {name:"Emanuel", fips:"13107"},
+    {name:"Evans", fips:"13109"},
+    {name:"Fannin", fips:"13111"},
+    {name:"Fayette", fips:"13113"},
+    {name:"Floyd", fips:"13115"},
+    {name:"Forsyth", fips:"13117"},
+    {name:"Franklin", fips:"13119"},
+    {name:"Fulton", fips:"13121"},
+    {name:"Gilmer", fips:"13123"},
+    {name:"Glascock", fips:"13125"},
+    {name:"Glynn", fips:"13127"},
+    {name:"Gordon", fips:"13129"},
+    {name:"Grady", fips:"13131"},
+    {name:"Greene", fips:"13133"},
+    {name:"Gwinnett", fips:"13135"},
+    {name:"Habersham", fips:"13137"},
+    {name:"Hall", fips:"13139"},
+    {name:"Hancock", fips:"13141"},
+    {name:"Haralson", fips:"13143"},
+    {name:"Harris", fips:"13145"},
+    {name:"Hart", fips:"13147"},
+    {name:"Heard", fips:"13149"},
+    {name:"Henry", fips:"13151"},
+    {name:"Houston", fips:"13153"},
+    {name:"Irwin", fips:"13155"},
+    {name:"Jackson", fips:"13157"},
+    {name:"Jasper", fips:"13159"},
+    {name:"Jeff Davis", fips:"13161"},
+    {name:"Jefferson", fips:"13163"},
+    {name:"Jenkins", fips:"13165"},
+    {name:"Johnson", fips:"13167"},
+    {name:"Jones", fips:"13169"},
+    {name:"Lamar", fips:"13171"},
+    {name:"Lanier", fips:"13173"},
+    {name:"Laurens", fips:"13175"},
+    {name:"Lee", fips:"13177"},
+    {name:"Liberty", fips:"13179"},
+    {name:"Lincoln", fips:"13181"},
+    {name:"Long", fips:"13183"},
+    {name:"Lowndes", fips:"13185"},
+    {name:"Lumpkin", fips:"13187"},
+    {name:"Macon", fips:"13193"},
+    {name:"Madison", fips:"13195"},
+    {name:"Marion", fips:"13197"},
+    {name:"McDuffie", fips:"13189"},
+    {name:"McIntosh", fips:"13191"},
+    {name:"Meriwether", fips:"13199"},
+    {name:"Miller", fips:"13201"},
+    {name:"Mitchell", fips:"13205"},
+    {name:"Monroe", fips:"13207"},
+    {name:"Montgomery", fips:"13209"},
+    {name:"Morgan", fips:"13211"},
+    {name:"Murray", fips:"13213"},
+    {name:"Muscogee", fips:"13215"},
+    {name:"Newton", fips:"13217"},
+    {name:"Oconee", fips:"13219"},
+    {name:"Oglethorpe", fips:"13221"},
+    {name:"Paulding", fips:"13223"},
+    {name:"Peach", fips:"13225"},
+    {name:"Pickens", fips:"13227"},
+    {name:"Pierce", fips:"13229"},
+    {name:"Pike", fips:"13231"},
+    {name:"Polk", fips:"13233"},
+    {name:"Pulaski", fips:"13235"},
+    {name:"Putnam", fips:"13237"},
+    {name:"Quitman", fips:"13239"},
+    {name:"Rabun", fips:"13241"},
+    {name:"Randolph", fips:"13243"},
+    {name:"Richmond", fips:"13245"},
+    {name:"Rockdale", fips:"13247"},
+    {name:"Schley", fips:"13249"},
+    {name:"Screven", fips:"13251"},
+    {name:"Seminole", fips:"13253"},
+    {name:"Spalding", fips:"13255"},
+    {name:"Stephens", fips:"13257"},
+    {name:"Stewart", fips:"13259"},
+    {name:"Sumter", fips:"13261"},
+    {name:"Talbot", fips:"13263"},
+    {name:"Taliaferro", fips:"13265"},
+    {name:"Tattnall", fips:"13267"},
+    {name:"Taylor", fips:"13269"},
+    {name:"Telfair", fips:"13271"},
+    {name:"Terrell", fips:"13273"},
+    {name:"Thomas", fips:"13275"},
+    {name:"Tift", fips:"13277"},
+    {name:"Toombs", fips:"13279"},
+    {name:"Towns", fips:"13281"},
+    {name:"Treutlen", fips:"13283"},
+    {name:"Troup", fips:"13285"},
+    {name:"Turner", fips:"13287"},
+    {name:"Twiggs", fips:"13289"},
+    {name:"Union", fips:"13291"},
+    {name:"Upson", fips:"13293"},
+    {name:"Walker", fips:"13295"},
+    {name:"Walton", fips:"13297"},
+    {name:"Ware", fips:"13299"},
+    {name:"Warren", fips:"13301"},
+    {name:"Washington", fips:"13303"},
+    {name:"Wayne", fips:"13305"},
+    {name:"Webster", fips:"13307"},
+    {name:"Wheeler", fips:"13309"},
+    {name:"White", fips:"13311"},
+    {name:"Whitfield", fips:"13313"},
+    {name:"Wilcox", fips:"13315"},
+    {name:"Wilkes", fips:"13317"},
+    {name:"Wilkinson", fips:"13319"},
+    {name:"Worth", fips:"13321"}
+  ];
+
+  var OFFICIALS = {
+    "13293": {
+      label: "Upson County Board of Commissioners",
+      html: '<div class="official-line"><strong>Dan Brue</strong>Chairman, Commissioner at Large — <a href="tel:7066465471">706-646-5471</a></div>' +
+            '<div class="official-line"><strong>Christopher Biggs</strong>District 1 Commissioner — <a href="tel:7066465471">706-646-5471</a></div>' +
+            '<div class="official-line"><strong>James Ellington</strong>District 2 Commissioner — <a href="tel:7064273183">706-427-3183</a></div>' +
+            '<div class="official-line"><strong>Paul Jones</strong>District 3 Commissioner — <a href="tel:7066477012">706-647-7012</a></div>' +
+            '<div class="official-line"><strong>Benjamin Watson</strong>District 4 Commissioner, Vice Chairman — <a href="tel:7066465471">706-646-5471</a></div>' +
+            '<div class="official-line"><a href="#contact">See full directory, including City of Thomaston →</a></div>'
+    }
+  };
+
+  var countySelect = document.getElementById('countySelect');
+  GA_COUNTIES.forEach(function(c){
+    var opt = document.createElement('option');
+    opt.value = c.fips;
+    opt.textContent = c.name + ' County';
+    if(c.fips === '13293') opt.selected = true;
+    countySelect.appendChild(opt);
+  });
+
+  function renderOfficials(fips, name){
+    var panelName = document.getElementById('officialsCountyName');
+    var content = document.getElementById('officialsContent');
+    panelName.textContent = name + ' County';
+    if(OFFICIALS[fips]){
+      content.innerHTML = OFFICIALS[fips].html;
+    } else {
+      content.innerHTML = '<p class="unverified">We haven\'t yet verified elected officials\' contact information for this county.</p>';
+    }
+  }
+
+  // Officials panel + county dropdown work independently of the map library,
+  // so they still function even if the map itself fails to load.
+  renderOfficials('13293', 'Upson');
+
+  var mapStatus = document.getElementById('mapStatus');
+
+  if (typeof L === 'undefined') {
+    mapStatus.textContent = 'The interactive map could not load. Please refresh the page.';
+    countySelect.addEventListener('change', function(){
+      var county = GA_COUNTIES.find(function(c){ return c.fips === this.value; }.bind(this));
+      if(county) renderOfficials(county.fips, county.name);
+    });
+  } else {
+    var map = L.map('leafletMap', { scrollWheelZoom: false }).setView([32.75, -83.5], 7);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var cameraLayer = L.layerGroup().addTo(map);
+    var countyBoundsByFips = {};
+
+    fetch('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json')
+      .then(function(res){ return res.json(); })
+      .then(function(data){
+        var gaFeatures = data.features.filter(function(f){ return f.id && f.id.indexOf('13') === 0 && f.id.length === 5; });
+        L.geoJSON({ type: 'FeatureCollection', features: gaFeatures }, {
+          style: { color: '#D42952', weight: 1, fillColor: '#D42952', fillOpacity: 0.05 },
+          onEachFeature: function(feature, layer){
+            countyBoundsByFips[feature.id] = layer.getBounds();
+            layer.on('click', function(){
+              countySelect.value = feature.id;
+              countySelect.dispatchEvent(new Event('change'));
+            });
+          }
+        }).addTo(map);
+        if(countyBoundsByFips['13293']) selectCounty('13293');
+      })
+      .catch(function(){
+        mapStatus.textContent = 'Could not load Georgia county boundaries right now.';
+      });
+
+    function loadCameras(fips, bounds){
+      cameraLayer.clearLayers();
+      mapStatus.textContent = 'Loading reported cameras…';
+      var sw = bounds.getSouthWest(), ne = bounds.getNorthEast();
+      var query = '[out:json][timeout:25];node["man_made"="surveillance"]["surveillance:type"="ALPR"](' +
+        sw.lat + ',' + sw.lng + ',' + ne.lat + ',' + ne.lng + ');out;';
+      fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query))
+        .then(function(res){ return res.json(); })
+        .then(function(data){
+          var count = data.elements ? data.elements.length : 0;
+          (data.elements || []).forEach(function(el){
+            L.circleMarker([el.lat, el.lon], {
+              radius: 6, color: '#D42952', weight: 2, fillColor: '#D42952', fillOpacity: 0.7
+            }).bindPopup('Reported ALPR camera — crowdsourced via OpenStreetMap contributors. Location accuracy not verified by the Azalea Privacy Alliance.').addTo(cameraLayer);
+          });
+          mapStatus.textContent = count + (count === 1 ? ' reported camera' : ' reported cameras') + ' found in this county (via OpenStreetMap).';
+        })
+        .catch(function(){
+          mapStatus.textContent = 'Could not load camera data right now — try again shortly.';
+        });
+    }
+
+    function selectCounty(fips){
+      var county = GA_COUNTIES.find(function(c){ return c.fips === fips; });
+      if(!county) return;
+      renderOfficials(fips, county.name);
+      var bounds = countyBoundsByFips[fips];
+      if(bounds){
+        map.flyToBounds(bounds, { padding: [20,20] });
+        loadCameras(fips, bounds);
+      } else {
+        mapStatus.textContent = 'Still loading county boundaries — try again in a moment.';
+      }
+    }
+
+    countySelect.addEventListener('change', function(){
+      selectCounty(this.value);
+    });
+  }
+</script>
 </body>
 </html>
