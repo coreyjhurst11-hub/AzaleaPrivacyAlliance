@@ -1250,28 +1250,85 @@
       allCameras = cams;
       if(pendingFips && countyBoundsByFips[pendingFips]) loadCameras(pendingFips, countyBoundsByFips[pendingFips]);
     }
-    var CAM_CACHE = 'apa_ga_cams_v1', CAM_TTL = 12 * 60 * 60 * 1000;
-    var CAM_QUERY = '[out:json][timeout:30];node["man_made"="surveillance"]["surveillance:type"="ALPR"](30.35,-85.61,35.01,-80.75);out skel qt;';
-    var CAM_SERVERS = ['https://overpass.private.coffee/api/interpreter', 'https://overpass-api.de/api/interpreter', 'https://maps.mail.ru/osm/tools/overpass/api/interpreter'];
-    function fetchCameras(i){
-      if(i >= CAM_SERVERS.length){ mapStatus.textContent = 'Could not load camera data right now — try again shortly.'; return; }
-      var ctrl = window.AbortController ? new AbortController() : null;
-      var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); }, 15000);
-      fetch(CAM_SERVERS[i], { method: 'POST', body: 'data=' + encodeURIComponent(CAM_QUERY),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, signal: ctrl ? ctrl.signal : undefined })
-        .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-        .then(function(d){
-          clearTimeout(timer);
-          var cams = (d.elements || []).map(function(el){ return [el.lat, el.lon]; });
-          try { localStorage.setItem(CAM_CACHE, JSON.stringify({ t: Date.now(), cams: cams })); } catch(e){}
-          camerasReady(cams);
-        })
-        .catch(function(){ clearTimeout(timer); fetchCameras(i + 1); });
+    // v2 cache key: discards any empty result a busy server may have left in visitors' browsers
+    var CAM_CACHE = 'apa_ga_cams_v2', CAM_TTL = 12 * 60 * 60 * 1000;
+    try { localStorage.removeItem('apa_ga_cams_v1'); } catch(e){}
+    var CAM_QUERY = '[out:json][timeout:90];node["man_made"="surveillance"]["surveillance:type"="ALPR"](30.35,-85.61,35.01,-80.75);out skel qt;';
+    var CAM_SERVERS = ['https://overpass-api.de/api/interpreter', 'https://overpass.private.coffee/api/interpreter', 'https://maps.mail.ru/osm/tools/overpass/api/interpreter'];
+    var fallbackMode = false;
+
+    // A server that is overloaded often answers "successfully" with zero results plus an error remark.
+    // Treat that as a failure, never as real data.
+    function validCameras(d){
+      if(!d || !Array.isArray(d.elements)) return null;
+      if(d.remark && /error|timed out|timeout|runtime|out of memory/i.test(d.remark)) return null;
+      if(d.elements.length === 0) return null;
+      return d.elements.filter(function(el){ return typeof el.lat === 'number'; }).map(function(el){ return [el.lat, el.lon]; });
     }
+    function getJSON(url, ms){
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); }, ms);
+      return fetch(url, { signal: ctrl ? ctrl.signal : undefined })
+        .then(function(r){ clearTimeout(timer); if(!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(function(err){ clearTimeout(timer); throw err; });
+    }
+    // Ask all servers at once and use whichever returns good data first
+    function fetchStatewide(){
+      var done = false, failures = 0;
+      CAM_SERVERS.forEach(function(server){
+        getJSON(server + '?data=' + encodeURIComponent(CAM_QUERY), 60000)
+          .then(function(d){
+            var cams = validCameras(d);
+            if(!cams) throw new Error('empty');
+            if(done) return;
+            done = true;
+            try { localStorage.setItem(CAM_CACHE, JSON.stringify({ t: Date.now(), cams: cams })); } catch(e){}
+            camerasReady(cams);
+          })
+          .catch(function(){
+            failures++;
+            if(!done && failures === CAM_SERVERS.length) enterFallback();
+          });
+      });
+    }
+    // Safety net: the original one-county-at-a-time method
+    function enterFallback(){
+      fallbackMode = true;
+      var fips = pendingFips || countySelect.value;
+      if(countyBoundsByFips[fips]) loadCountyDirect(fips, countyBoundsByFips[fips], 0);
+    }
+    function loadCountyDirect(fips, bounds, i){
+      cameraLayer.clearLayers();
+      if(i >= CAM_SERVERS.length){ mapStatus.textContent = 'Could not load camera data right now — try again shortly.'; return; }
+      mapStatus.textContent = 'Loading reported cameras…';
+      var q = '[out:json][timeout:25];node["man_made"="surveillance"]["surveillance:type"="ALPR"](' +
+        bounds.getSouth() + ',' + bounds.getWest() + ',' + bounds.getNorth() + ',' + bounds.getEast() + ');out skel qt;';
+      getJSON(CAM_SERVERS[i] + '?data=' + encodeURIComponent(q), 30000)
+        .then(function(d){
+          if(!d || !Array.isArray(d.elements) || (d.remark && /error|timed out|runtime/i.test(d.remark))) throw new Error('bad');
+          if(countySelect.value !== fips) return;
+          var count = 0;
+          d.elements.forEach(function(el){
+            if(!inCounty(fips, el.lat, el.lon)) return;
+            count++;
+            L.circleMarker([el.lat, el.lon], {
+              renderer: canvasRenderer, radius: 6, color: '#D42952', weight: 2, fillColor: '#D42952', fillOpacity: 0.7
+            }).bindPopup('Reported ALPR camera — crowdsourced via OpenStreetMap contributors. Location accuracy not verified by the Azalea Privacy Alliance.').addTo(cameraLayer);
+          });
+          mapStatus.textContent = count + (count === 1 ? ' reported camera' : ' reported cameras') + ' found in this county (via OpenStreetMap).';
+        })
+        .catch(function(){ loadCountyDirect(fips, bounds, i + 1); });
+    }
+    var _loadCameras = loadCameras;
+    loadCameras = function(fips, bounds){
+      if(fallbackMode) return loadCountyDirect(fips, bounds, 0);
+      return _loadCameras(fips, bounds);
+    };
+
     var camCached = null;
     try { camCached = JSON.parse(localStorage.getItem(CAM_CACHE) || 'null'); } catch(e){}
-    if(camCached && camCached.cams && (Date.now() - camCached.t) < CAM_TTL) camerasReady(camCached.cams);
-    else fetchCameras(0);
+    if(camCached && camCached.cams && camCached.cams.length && (Date.now() - camCached.t) < CAM_TTL) camerasReady(camCached.cams);
+    else fetchStatewide();
 
     function selectCounty(fips){
       var county = GA_COUNTIES.find(function(c){ return c.fips === fips; });
