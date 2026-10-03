@@ -214,7 +214,11 @@
   .demand-list strong{color:var(--black); font-weight:600; min-width:150px; flex-shrink:0;}
 
   .resource-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line-dark); border:1px solid var(--line-dark); max-width:1000px; margin:0 auto;}
-  @media (max-width:900px){.resource-grid{grid-template-columns:repeat(2,1fr);}}
+  .resource-grid > .resource-card:last-child:nth-child(3n+1){grid-column:1 / -1;}
+  .resource-grid > .resource-card:last-child:nth-child(3n+1) p{max-width:620px;}
+  @media (max-width:900px){.resource-grid{grid-template-columns:repeat(2,1fr);}
+    .resource-grid > .resource-card:last-child:nth-child(3n+1){grid-column:auto;}
+    .resource-grid > .resource-card:last-child:nth-child(odd){grid-column:1 / -1;}}
   @media (max-width:600px){.resource-grid{grid-template-columns:1fr;}}
   .resource-card{background:#141414; padding:36px 30px; display:flex; flex-direction:column; gap:14px;}
   .resource-card h3{font-size:1.05rem; margin:0;}
@@ -489,6 +493,11 @@
           <h3>The September 11 Letter</h3>
           <p>A detailed proposal for regulating Flock camera access — including an independent ombudsman, audit requirements, and public signage.</p>
           <a href="documents/september-11-letter.pdf">Read the PDF →</a>
+        </div>
+        <div class="resource-card">
+          <h3>Letter to the Editor — Upson Beacon</h3>
+          <p>"Flock Cameras Need Regulation, Controlled Access, &amp; Safeguards," by Mary Alice Adams for the Alliance, published in the Upson Beacon on September 23, 2026.</p>
+          <a href="documents/upson-beacon-letter-to-editor.pdf">Read the PDF →</a>
         </div>
         <div class="resource-card">
           <h3>The Petition</h3>
@@ -1217,7 +1226,6 @@
 
     // ---- Fast camera loading: one statewide download, cached, filtered per county instantly ----
     var allCameras = null, pendingFips = null;
-    var canvasRenderer = L.canvas({ padding: 0.5 });
     function inRing(x, y, ring){
       var inside = false;
       for(var i = 0, j = ring.length - 1; i < ring.length; j = i++){
@@ -1247,7 +1255,7 @@
         if(!inCounty(fips, c[0], c[1])) return;
         count++;
         L.circleMarker([c[0], c[1]], {
-          renderer: canvasRenderer, radius: 6, color: '#D42952', weight: 2, fillColor: '#D42952', fillOpacity: 0.7
+          radius: 6, color: '#D42952', weight: 2, fillColor: '#D42952', fillOpacity: 0.7
         }).bindPopup('Reported ALPR camera — crowdsourced via OpenStreetMap contributors. Location accuracy not verified by the Azalea Privacy Alliance.').addTo(cameraLayer);
       });
       mapStatus.textContent = count + (count === 1 ? ' reported camera' : ' reported cameras') + ' found in this county (via OpenStreetMap).';
@@ -1318,7 +1326,7 @@
             if(!inCounty(fips, el.lat, el.lon)) return;
             count++;
             L.circleMarker([el.lat, el.lon], {
-              renderer: canvasRenderer, radius: 6, color: '#D42952', weight: 2, fillColor: '#D42952', fillOpacity: 0.7
+              radius: 6, color: '#D42952', weight: 2, fillColor: '#D42952', fillOpacity: 0.7
             }).bindPopup('Reported ALPR camera — crowdsourced via OpenStreetMap contributors. Location accuracy not verified by the Azalea Privacy Alliance.').addTo(cameraLayer);
           });
           mapStatus.textContent = count + (count === 1 ? ' reported camera' : ' reported cameras') + ' found in this county (via OpenStreetMap).';
