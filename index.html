@@ -250,6 +250,12 @@
   }
   .resource-card a:hover{text-decoration:underline;}
 
+  .legal-group{
+    max-width:1100px; margin:0 auto 18px; display:flex; align-items:center; gap:16px;
+    font-size:0.74rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--azalea);
+  }
+  .legal-group::after{content:""; flex:1; height:1px; background:var(--line-light);}
+  .legal-grid.legal-grid-ga{margin-bottom:60px;}
   .legal-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1100px; margin:0 auto;}
   @media (max-width:900px){.legal-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:600px){.legal-grid{grid-template-columns:1fr;}}
@@ -603,8 +609,30 @@
       <div class="section-head">
         <p class="section-eyebrow">LEGAL MATERIALS</p>
         <h2>The law behind our position.</h2>
-        <p>Court rulings and reporting on geofence and camera-network surveillance, for anyone who wants to read the primary sources.</p>
+        <p>Georgia law, local policy, and the court rulings shaping camera-network surveillance, for anyone who wants to read the primary sources.</p>
       </div>
+      <h3 class="legal-group">Georgia law &amp; local policy</h3>
+      <div class="legal-grid legal-grid-ga">
+        <div class="legal-card">
+          <span class="legal-tag">Georgia statute</span>
+          <h3>O.C.G.A. § 35-1-22 — Georgia's ALPR Law</h3>
+          <p>Georgia's license plate reader statute: plate data may be accessed only for a law enforcement purpose, must be destroyed within 30 months, and is shielded from Open Records requests. Misuse is a high and aggravated misdemeanor.</p>
+          <a href="documents/ocga-35-1-22-alpr-law.pdf">Read the statute →</a>
+        </div>
+        <div class="legal-card">
+          <span class="legal-tag">State policy</span>
+          <h3>Georgia DPS License Plate Reader Policy</h3>
+          <p>The Georgia Department of Public Safety's Policy 6.09, governing how its personnel use license plate readers, manage hot lists, and retain plate data for no more than thirty months.</p>
+          <a href="documents/ga-dps-lpr-policy.pdf">Read the policy →</a>
+        </div>
+        <div class="legal-card">
+          <span class="legal-tag">Local policy</span>
+          <h3>Thomaston Police ALPR User Agreement</h3>
+          <p>The agreement Thomaston officers sign for license plate reader access: law enforcement purposes only, no personal use, every search logged and subject to audit, with violations punishable up to termination.</p>
+          <a href="documents/thomaston-pd-alpr-user-agreement.pdf">Read the agreement →</a>
+        </div>
+      </div>
+      <h3 class="legal-group">National cases, laws &amp; rulings</h3>
       <div class="legal-grid">
         <div class="legal-card">
           <span class="legal-tag">Case summary</span>
