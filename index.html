@@ -250,6 +250,21 @@
   }
   .resource-card a:hover{text-decoration:underline;}
 
+  .tag-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .new-badge{
+    display:inline-block; font-size:0.66rem; font-weight:800; letter-spacing:0.08em;
+    text-transform:uppercase; color:#fff; background:var(--azalea); padding:4px 8px; border-radius:6px; line-height:1.25;
+  }
+  .legal-filter{max-width:1100px; margin:0 auto 20px; display:flex; flex-wrap:wrap; gap:8px;}
+  .filter-chip{
+    font:inherit; font-size:0.85rem; font-weight:600; cursor:pointer; color:var(--black);
+    background:var(--white); border:1px solid var(--line-light); border-radius:980px; padding:7px 16px;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .filter-chip:hover{border-color:rgba(10,10,10,0.3);}
+  .filter-chip:focus-visible{outline:2px solid var(--azalea); outline-offset:2px;}
+  .filter-chip.active{background:var(--black); border-color:var(--black); color:#fff;}
+  .legal-card[hidden]{display:none;}
   .legal-group{
     max-width:1100px; margin:0 auto 18px; display:flex; align-items:center; gap:16px;
     font-size:0.74rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--azalea);
@@ -633,62 +648,74 @@
         </div>
       </div>
       <h3 class="legal-group">National cases, laws &amp; rulings</h3>
-      <div class="legal-grid">
-        <div class="legal-card">
+      <div class="legal-filter" role="group" aria-label="Filter national materials">
+        <button type="button" class="filter-chip active" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="filter-chip" data-filter="rulings" aria-pressed="false">Court rulings</button>
+        <button type="button" class="filter-chip" data-filter="suits" aria-pressed="false">Lawsuits</button>
+        <button type="button" class="filter-chip" data-filter="laws" aria-pressed="false">Laws &amp; orders</button>
+      </div>
+      <div class="legal-grid" id="nationalGrid">
+        <div class="legal-card" data-kind="rulings">
           <span class="legal-tag">Case summary</span>
           <h3>Chatrie v. United States (2026)</h3>
           <p>Wikipedia overview of the Supreme Court ruling that police conducted a Fourth Amendment search when they obtained a suspect's location data from Google via a geofence warrant.</p>
           <a href="documents/chatrie-v-united-states.pdf">Read the overview →</a>
         </div>
-        <div class="legal-card">
+        <div class="legal-card" data-kind="rulings">
           <span class="legal-tag">Full opinion</span>
           <h3>Chatrie v. United States — Full Opinion</h3>
           <p>The complete Supreme Court opinion, including the majority, concurrences, and dissents, on geofence warrants and the Fourth Amendment.</p>
           <a href="documents/chatrie-v-united-states-opinion.pdf">Read the opinion →</a>
         </div>
-        <div class="legal-card">
+        <div class="legal-card" data-kind="rulings">
           <span class="legal-tag">Case summary</span>
           <h3>Carpenter v. United States (2018)</h3>
           <p>The landmark precedent holding that the government generally needs a warrant to access historical cell-site location records — the foundation for Chatrie.</p>
           <a href="documents/carpenter-v-united-states.pdf">Read the overview →</a>
         </div>
-        <div class="legal-card">
+        <div class="legal-card" data-kind="rulings">
           <span class="legal-tag">Full opinion</span>
           <h3>Carpenter v. United States — Full Opinion</h3>
           <p>The complete 2018 Supreme Court opinion holding that the government generally needs a warrant to access historical cell-site location records.</p>
           <a href="documents/carpenter-v-united-states-opinion.pdf">Read the opinion →</a>
         </div>
-        <div class="legal-card">
+        <div class="legal-card" data-kind="rulings">
+          <div class="tag-row"><span class="legal-tag">Court ruling</span><span class="new-badge">New</span></div>
+          <h3>United States v. Kyle — Federal Court Opinion (2026)</h3>
+          <p>U.S. District Judge Sara Hill (N.D. Okla.) held on October 1, 2026 that a deputy's warrantless search of Flock and another plate reader database was a Fourth Amendment search, applying Carpenter and Chatrie: "It is not too much to draw the line at indiscriminate mass surveillance."</p>
+          <a href="documents/us-v-kyle-alpr-opinion.pdf">Read the opinion →</a>
+        </div>
+        <div class="legal-card" data-kind="laws">
           <span class="legal-tag">Ordinance</span>
           <h3>Oconee County, SC — Ordinance 2026-26</h3>
           <p>The full text of the ordinance amending the Oconee County Code to prohibit county funds, property, and roads from supporting mass-surveillance systems like Flock.</p>
           <a href="documents/oconee-county-flock-ordinance.pdf">Read the ordinance →</a>
         </div>
-        <div class="legal-card">
+        <div class="legal-card" data-kind="suits">
           <span class="legal-tag">Legal filing</span>
           <h3>Wisconsin Lawsuit — Full Complaint</h3>
           <p>The complete legal complaint filed by WILL against Waukesha County and 11 municipalities over warrantless searches of the Flock camera database.</p>
           <a href="documents/wisconsin-lawsuit-complaint.pdf">Read the complaint →</a>
         </div>
-        <div class="legal-card">
+        <div class="legal-card" data-kind="laws">
           <span class="legal-tag">Executive order</span>
           <h3>Missouri Executive Order 26-18</h3>
           <p>Governor Mike Kehoe's order setting 30-day data retention limits, banning facial-recognition integration, and requiring mandatory audit logging for ALPR technology statewide.</p>
           <a href="documents/missouri-executive-order-26-18.pdf">Read the order →</a>
         </div>
-        <div class="legal-card">
+        <div class="legal-card" data-kind="suits">
           <span class="legal-tag">Lawsuit</span>
           <h3>Institute for Justice — San Jose ALPR Lawsuit</h3>
           <p>Three San Jose residents and the Institute for Justice filed a federal class action arguing the city's 474-camera ALPR network — searched thousands of times a day with no warrant requirement — violates the Fourth Amendment.</p>
           <a href="documents/ij-san-jose-lawsuit-press-release.pdf">Read the release →</a>
         </div>
-        <div class="legal-card">
+        <div class="legal-card" data-kind="suits">
           <span class="legal-tag">Legal filing</span>
           <h3>Tan v. City of San Jose — Full Complaint</h3>
           <p>The complete federal class action complaint filed April 15, 2026 in the Northern District of California (Case 5:26-cv-03181) by the Institute for Justice, arguing San Jose's warrantless ALPR searches violate the Fourth Amendment.</p>
           <a href="documents/ij-san-jose-complaint.pdf">Read the complaint →</a>
         </div>
-        <div class="legal-card">
+        <div class="legal-card" data-kind="rulings">
           <span class="legal-tag">Court ruling</span>
           <h3>Washington — Flock Data Ruled Public Record</h3>
           <p>A Skagit County Superior Court judge denied Stanwood and Sedro-Woolley's request to exempt Flock camera footage from Washington's Public Records Act, holding the footage is subject to public disclosure.</p>
@@ -706,6 +733,12 @@
         <p>Ongoing coverage of Flock and ALPR developments across the country, as cities and states respond.</p>
       </div>
       <div class="legal-grid news-grid">
+        <div class="news-card">
+          <div class="tag-row"><span class="news-tag">News</span><span class="new-badge">New</span></div>
+          <h3>Oklahoma Judge Rules Warrantless Flock Search Unconstitutional</h3>
+          <p>NonDoc reports on the first ruling finding that searching plate reader data without a warrant violates the Fourth Amendment. The deputy pulled more than 50 sightings of one driver across a month, because her car had California plates.</p>
+          <a href="documents/oklahoma-alpr-ruling-nondoc.pdf">Read the article →</a>
+        </div>
         <div class="news-card">
           <span class="news-tag">News</span>
           <h3>Oconee County, SC Bans Flock Cameras</h3>
@@ -1053,6 +1086,20 @@
       });
     });
   }
+  (function(){
+    var grid = document.getElementById('nationalGrid');
+    if(!grid) return;
+    var chips = document.querySelectorAll('.filter-chip');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var f = chip.getAttribute('data-filter');
+        chips.forEach(function(c){ var on = c === chip; c.classList.toggle('active', on); c.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+        grid.querySelectorAll('.legal-card').forEach(function(card){
+          card.hidden = !(f === 'all' || card.getAttribute('data-kind') === f);
+        });
+      });
+    });
+  })();
   wireForm('petitionForm', 'petitionStatus', 'Thank you — your signature has been added.');
   wireForm('donateForm', 'donateStatus', 'Thanks! Taking you to secure checkout…', 'https://buy.stripe.com/aFa14g7HF0RP3Gk68EaEE00');
   wireForm('contactForm', 'contactStatus', 'Message sent — we\'ll get back to you soon.');
