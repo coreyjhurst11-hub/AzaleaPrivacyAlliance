@@ -235,6 +235,9 @@
     border-radius:20px; padding:48px 40px;
   }
   .flock-check p{color:var(--ink-soft); font-size:1.08rem; line-height:1.6; max-width:640px; margin:0 auto 28px;}
+  .flock-check .flock-example{font-size:0.98rem; color:#fff; border-left:3px solid var(--azalea); padding-left:16px; text-align:left; max-width:600px; margin:0 auto 28px;}
+  .flock-check .flock-example a{color:#ff7a95; font-weight:700; text-decoration:none; white-space:nowrap;}
+  .flock-check .flock-example a:hover{text-decoration:underline;}
   .flock-check .flock-note{font-size:0.85rem; color:rgba(255,255,255,0.6); margin:20px auto 0; max-width:560px;}
   .demand-list strong{color:var(--black); font-weight:600; min-width:150px; flex-shrink:0;}
 
@@ -532,6 +535,7 @@
       </div>
       <div class="flock-check">
         <p>HaveIBeenFlocked.com is an independent, donor-supported project that has compiled millions of Flock audit-log records into a searchable database. Enter your license plate and it will tell you whether it has ever turned up in a Flock search — no data you enter is saved, stored, or logged.</p>
+        <p class="flock-example">It works. Just up the road in Coweta County, a man looked up his own plate and found five sheriff's office searches run while his lawsuit against deputies was pending. <a href="documents/coweta-flock-retaliation-wsb.pdf">Read his story →</a></p>
         <a href="https://haveibeenflocked.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Check HaveIBeenFlocked.com →</a>
         <p class="flock-note">HaveIBeenFlocked.com is run independently and is not affiliated with the Azalea Privacy Alliance. Its data comes from public audit logs and may be incomplete or delayed.</p>
       </div>
@@ -684,7 +688,7 @@
           <a href="documents/carpenter-v-united-states-opinion.pdf">Read the opinion →</a>
         </div>
         <div class="legal-card" data-kind="rulings">
-          <div class="tag-row"><span class="legal-tag">Court ruling</span><span class="new-badge">New</span></div>
+          <span class="legal-tag">Court ruling</span>
           <h3>United States v. Kyle — Federal Court Opinion (2026)</h3>
           <p>U.S. District Judge Sara Hill (N.D. Okla.) held on October 1, 2026 that a deputy's warrantless search of Flock and another plate reader database was a Fourth Amendment search, applying Carpenter and Chatrie: "It is not too much to draw the line at indiscriminate mass surveillance."</p>
           <a href="documents/us-v-kyle-alpr-opinion.pdf">Read the opinion →</a>
@@ -738,7 +742,13 @@
       </div>
       <div class="legal-grid news-grid">
         <div class="news-card">
-          <div class="tag-row"><span class="news-tag">News</span><span class="new-badge">New</span></div>
+          <div class="tag-row"><span class="news-tag">Georgia news</span><span class="new-badge">New</span></div>
+          <h3>Coweta County Man Says Deputies Used Flock to Retaliate Against Him</h3>
+          <p>WSB-TV, October 14, 2026: Tyler Murkerson found five Flock searches of his plate on HaveIBeenFlocked.com, run while his lawsuit against Coweta County deputies was pending. The logged reasons: "info" and "37." He is now suing the sheriff's office and Flock.</p>
+          <a href="documents/coweta-flock-retaliation-wsb.pdf">Read the story →</a>
+        </div>
+        <div class="news-card">
+          <span class="news-tag">News</span>
           <h3>Oklahoma Judge Rules Warrantless Flock Search Unconstitutional</h3>
           <p>NonDoc reports on the first ruling finding that searching plate reader data without a warrant violates the Fourth Amendment. The deputy pulled more than 50 sightings of one driver across a month, because her car had California plates.</p>
           <a href="documents/oklahoma-alpr-ruling-nondoc.pdf">Read the article →</a>
