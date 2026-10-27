@@ -79,7 +79,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   nav.links a{color:rgba(255,255,255,0.85); text-decoration:none; font-weight:500; font-size:0.82rem; white-space:nowrap; transition:color .2s;}
   nav.links a:hover{color:#fff;}
   .nav-toggle{display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#fff;}
-  @media (max-width:1180px){
+  @media (max-width:1120px){
     nav.links{display:none;}
     nav.links.open{
       display:flex; flex-direction:column; gap:0;
@@ -512,50 +512,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     display:inline-flex; align-items:center;
   }
   .footer-btn:hover{border-color:rgba(10,10,10,0.3);}
-
-  /* ===== Tip line ===== */
-  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;}
-  .tipline{background:var(--white); padding:72px 0 40px;}
-  .tip-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:48px; align-items:center; max-width:1100px;}
-  @media (max-width:900px){.tip-grid{grid-template-columns:1fr; gap:28px;}}
-  .tip-intro h2{font-size:clamp(2rem,4vw,2.7rem); margin:0 0 14px;}
-  .tip-lede{font-size:1.1rem; line-height:1.6; color:var(--ink-soft-dark); margin:0 0 22px;}
-  .tip-points{list-style:none; margin:0 0 22px; padding:0; display:grid; gap:12px;}
-  .tip-points li{position:relative; padding-left:28px; line-height:1.5; color:var(--ink-soft-dark);}
-  .tip-points li::before{content:""; position:absolute; left:0; top:7px; width:12px; height:12px; border-radius:50%; background:var(--azalea); box-shadow:0 0 0 4px rgba(212,41,82,0.14);}
-  .tip-points strong{color:var(--black);}
-  .tip-note{font-size:0.85rem; line-height:1.55; color:var(--ink-soft-dark); border-left:3px solid var(--line-light); padding-left:14px; margin:0;}
-  .tipbot{background:var(--black); color:#fff; border-radius:22px; overflow:hidden; display:flex; flex-direction:column; height:560px;
-    box-shadow:0 30px 70px -36px rgba(10,10,10,0.6); border-top:5px solid var(--azalea);}
-  @media (max-width:600px){.tipbot{height:540px; border-radius:18px;}}
-  .tipbot-head{display:flex; align-items:center; gap:12px; padding:16px 18px; border-bottom:1px solid var(--line-dark);}
-  .tipbot-head strong{display:block; font-size:0.98rem;}
-  .tipbot-head span{display:block; font-size:0.78rem; color:var(--ink-soft);}
-  .tipbot-avatar{width:38px; height:38px; flex-shrink:0; border-radius:50%; display:grid; place-items:center; background:var(--azalea); color:#fff; font-size:1.15rem;}
-  .tipbot-restart{margin-left:auto; font:inherit; font-size:0.8rem; font-weight:600; color:var(--ink-soft); background:none; border:1px solid var(--line-dark); border-radius:999px; padding:7px 13px; cursor:pointer; min-height:36px;}
-  .tipbot-restart:hover{color:#fff; border-color:rgba(255,255,255,0.35);}
-  .tipbot-log{flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:10px; scroll-behavior:smooth;}
-  .msg{max-width:86%; padding:11px 15px; border-radius:18px; font-size:0.96rem; line-height:1.5; white-space:pre-wrap; word-wrap:break-word; animation:msgIn .25s ease-out;}
-  @keyframes msgIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
-  .msg.bot{align-self:flex-start; background:rgba(255,255,255,0.08); border-bottom-left-radius:6px;}
-  .msg.me{align-self:flex-end; background:var(--azalea); color:#fff; border-bottom-right-radius:6px;}
-  .msg.typing{color:var(--ink-soft); letter-spacing:0.2em;}
-  .msg.summary{max-width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--line-dark); white-space:normal;}
-  .msg.summary dl{margin:6px 0 0; display:grid; grid-template-columns:auto 1fr; gap:6px 12px; font-size:0.88rem;}
-  .msg.summary dt{color:var(--ink-soft);} .msg.summary dd{margin:0; white-space:pre-wrap;}
-  .tipbot-chips{display:flex; flex-wrap:wrap; gap:8px; padding:0 18px 12px;}
-  .tipbot-chips:empty{display:none;}
-  .chip{font:inherit; font-size:0.88rem; font-weight:600; color:#fff; background:rgba(255,255,255,0.06); border:1px solid rgba(255,108,143,0.55);
-    border-radius:999px; padding:9px 15px; cursor:pointer; min-height:40px; transition:background .15s;}
-  .chip:hover{background:rgba(212,41,82,0.22);}
-  .chip.primary{background:var(--azalea); border-color:var(--azalea);}
-  .chip.quiet{border-color:var(--line-dark); color:var(--ink-soft);}
-  .tipbot-input{display:flex; align-items:flex-end; gap:10px; padding:12px 14px 14px; border-top:1px solid var(--line-dark);}
-  .tipbot-input textarea{flex:1; resize:none; max-height:140px; min-height:46px; padding:12px 14px; border-radius:14px;
-    background:rgba(255,255,255,0.07); color:#fff; border:1px solid var(--line-dark); font:inherit; font-size:1rem; line-height:1.4;}
-  .tipbot-input textarea:disabled{opacity:0.45;}
-  .tipbot-send{width:46px; height:46px; flex-shrink:0; border-radius:50%; border:none; background:var(--azalea); color:#fff; font-size:1.2rem; font-weight:700; cursor:pointer;}
-  .tipbot-send:disabled{opacity:0.4; cursor:default;}
 </style>
 </head>
 <body>
@@ -572,7 +528,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="brand-text">Azalea Privacy Alliance</span>
     </a>
     <nav class="links" id="navLinks">
-      <a href="#tips">Tip Line</a>
       <a href="#problem">The Problem</a>
       <a href="#asking">Our Asks</a>
       <a href="#check">Check Yourself</a>
@@ -604,7 +559,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="lede">We are a coalition of concerned citizens working to bring transparency, accountability, and reasonable limits to government use of mass surveillance technology — starting with AI-powered license plate readers.</p>
       <div class="btn-row">
         <a href="#action" class="btn btn-primary">Join us</a>
-        <a href="#tips" class="btn btn-ghost-dark">Send a tip</a>
         <a href="#problem" class="btn btn-ghost-dark">Learn more</a>
       </div>
     </div>
@@ -631,36 +585,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a class="hometown-ij" href="#why">Thomaston is one of 92 Georgia cases in a national database of ALPR abuse →</a>
         </div>
       </article>
-    </div>
-  </section>
-
-  <section id="tips" class="tipline">
-    <div class="wrap tip-grid">
-      <div class="tip-intro">
-        <p class="section-eyebrow">CONFIDENTIAL TIP LINE</p>
-        <h2>Seen something? Tell us.</h2>
-        <p class="tip-lede">If you know of a license plate reader being misused, a camera we haven't mapped, or a record that should be public, send it here. Your name is optional.</p>
-        <ul class="tip-points">
-          <li><strong>Anonymous by choice.</strong> We never ask who you are unless you decide to tell us.</li>
-          <li><strong>Straight to us.</strong> Tips go directly to the Alliance's inbox, nowhere else.</li>
-          <li><strong>Takes two minutes.</strong> Answer a few questions; skip any you like.</li>
-        </ul>
-        <p class="tip-note">For extra privacy, send from a personal phone rather than a work device or network, and leave out details that could identify you. This is not for emergencies; if someone is in danger, call 911.</p>
-      </div>
-      <div class="tipbot" id="tipbot" aria-label="Tip line assistant">
-        <div class="tipbot-head">
-          <span class="tipbot-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><g fill="#fff"><ellipse cx="12" cy="6.2" rx="3.3" ry="4.6"/><ellipse cx="12" cy="6.2" rx="3.3" ry="4.6" transform="rotate(72 12 12)"/><ellipse cx="12" cy="6.2" rx="3.3" ry="4.6" transform="rotate(144 12 12)"/><ellipse cx="12" cy="6.2" rx="3.3" ry="4.6" transform="rotate(216 12 12)"/><ellipse cx="12" cy="6.2" rx="3.3" ry="4.6" transform="rotate(288 12 12)"/></g><circle cx="12" cy="12" r="2.4" fill="#D42952"/></svg></span>
-          <div><strong>Tip line</strong><span>Azalea Privacy Alliance</span></div>
-          <button type="button" class="tipbot-restart" id="tipRestart" hidden>Start over</button>
-        </div>
-        <div class="tipbot-log" id="tipLog" role="log" aria-live="polite"></div>
-        <div class="tipbot-chips" id="tipChips"></div>
-        <form class="tipbot-input" id="tipForm" autocomplete="off">
-          <label for="tipText" class="sr-only">Your answer</label>
-          <textarea id="tipText" rows="1" placeholder="Type your answer…"></textarea>
-          <button type="submit" class="tipbot-send" aria-label="Send answer">↑</button>
-        </form>
-      </div>
     </div>
   </section>
 
@@ -1291,7 +1215,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="footer-links" aria-label="Footer">
       <a href="#petition-form">Sign the petition</a>
       <a href="#donate">Donate</a>
-      <a href="#tips">Send a tip</a>
       <a href="#check">Check your plate</a>
       <a href="#legal">Legal materials</a>
       <a href="#contact">Contact your officials</a>
@@ -1324,7 +1247,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     links.addEventListener('click', function(e){ if(e.target.closest('a')) setOpen(false); });
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && links.classList.contains('open')){ setOpen(false); toggle.focus(); } });
     document.addEventListener('click', function(e){ if(links.classList.contains('open') && !e.target.closest('header')) setOpen(false); });
-    window.addEventListener('resize', function(){ if(window.innerWidth > 1180) setOpen(false); });
+    window.addEventListener('resize', function(){ if(window.innerWidth > 1120) setOpen(false); });
   })();
 
   // ----- Highlight the menu item for the section on screen -----
@@ -1433,163 +1356,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
       });
     });
-  })();
-
-  // ===== Tip line assistant: guided questions, sent straight to the Alliance inbox =====
-  (function(){
-    var log = document.getElementById('tipLog'), chipsEl = document.getElementById('tipChips');
-    var form = document.getElementById('tipForm'), input = document.getElementById('tipText');
-    var sendBtn = form.querySelector('.tipbot-send'), restartBtn = document.getElementById('tipRestart');
-    if(!log) return;
-    var tip, step, onText;
-
-    function el(tag, cls, text){ var e = document.createElement(tag); if(cls) e.className = cls; if(text != null) e.textContent = text; return e; }
-    function scroll(){ log.scrollTop = log.scrollHeight; }
-    function me(text){ log.appendChild(el('div','msg me',text)); scroll(); }
-    function bot(text, then){
-      var t = el('div','msg bot typing','•••'); log.appendChild(t); scroll();
-      var delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : Math.min(700, 250 + text.length * 6);
-      setTimeout(function(){ t.classList.remove('typing'); t.textContent = text; scroll(); if(then) then(); }, delay);
-    }
-    function chips(list){
-      chipsEl.innerHTML = '';
-      (list || []).forEach(function(c){
-        var b = el('button','chip' + (c.cls ? ' ' + c.cls : ''), c.label); b.type = 'button';
-        b.addEventListener('click', function(){ chipsEl.innerHTML = ''; if(c.echo !== false) me(c.label); c.go(); });
-        chipsEl.appendChild(b);
-      });
-    }
-    function ask(text, opts){
-      opts = opts || {};
-      setInput(false); chips([]);
-      bot(text, function(){
-        onText = opts.onText || null;
-        setInput(!!opts.onText, opts.placeholder);
-        var list = (opts.chips || []).slice();
-        if(opts.skip) list.push({ label:'Skip', cls:'quiet', go: opts.skip });
-        chips(list);
-        if(opts.onText && window.matchMedia('(pointer:fine)').matches) input.focus();
-      });
-    }
-    function setInput(on, placeholder){
-      input.disabled = !on; sendBtn.disabled = !on;
-      input.placeholder = on ? (placeholder || 'Type your answer…') : 'Choose an option above';
-    }
-    input.addEventListener('input', function(){ input.style.height = 'auto'; input.style.height = Math.min(140, input.scrollHeight) + 'px'; });
-    input.addEventListener('keydown', function(e){ if(e.key === 'Enter' && !e.shiftKey && !('ontouchstart' in window)){ e.preventDefault(); form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event('submit')); } });
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var v = input.value.trim(); if(!v || !onText) return;
-      input.value = ''; input.style.height = ''; me(v); chips([]);
-      var fn = onText; onText = null; setInput(false); fn(v);
-    });
-
-    // ---- The conversation ----
-    function start(){
-      log.innerHTML = ''; chips([]); restartBtn.hidden = true;
-      tip = { anonymous: true };
-      bot('Hi. This is the Azalea Privacy Alliance tip line. Everything you share goes only to our team, and you can stay anonymous.', function(){
-        ask('What would you like to tell us about?', { chips: [
-          { label:'Misuse of Flock or plate readers', go:function(){ tip.type = 'Misuse of Flock / license plate readers'; what(); } },
-          { label:'A camera location', go:function(){ tip.type = 'Camera location'; what(); } },
-          { label:'Records or policy', go:function(){ tip.type = 'Public records / policy'; what(); } },
-          { label:'Something else', go:function(){ tip.type = 'Other'; what(); } }
-        ]});
-      });
-    }
-    function what(){
-      restartBtn.hidden = false;
-      var prompt = tip.type === 'Camera location'
-        ? 'Where is the camera? A street, intersection, or nearby landmark is perfect.'
-        : 'Tell us what happened, in your own words. Include as much or as little as you like.';
-      ask(prompt, { placeholder:'Describe it here…', onText:function(v){ tip.details = v; where(); } });
-    }
-    function where(){
-      ask('Where did this happen?', { placeholder:'Or type a place…',
-        chips: [
-          { label:'Thomaston', go:function(){ tip.where = 'Thomaston'; when(); } },
-          { label:'Upson County', go:function(){ tip.where = 'Upson County'; when(); } },
-          { label:'Elsewhere in Georgia', go:function(){ ask('Which city or county?', { placeholder:'City or county…', onText:function(v){ tip.where = v + ', Georgia'; when(); } }); } }
-        ],
-        onText:function(v){ tip.where = v; when(); },
-        skip:function(){ when(); } });
-    }
-    function when(){
-      ask('About when did it happen?', { placeholder:'A date or rough timeframe…',
-        chips: [
-          { label:'This week', go:function(){ tip.when = 'This week'; who(); } },
-          { label:'This month', go:function(){ tip.when = 'This month'; who(); } },
-          { label:'Earlier', go:function(){ tip.when = 'Earlier'; who(); } }
-        ],
-        onText:function(v){ tip.when = v; who(); }, skip:function(){ who(); } });
-    }
-    function who(){
-      ask('Do you know who was involved? An agency, officer name, or badge number all help. Only share what you’re comfortable with.', {
-        placeholder:'Names, agency, badge number…', onText:function(v){ tip.who = v; evidence(); }, skip:function(){ evidence(); } });
-    }
-    function evidence(){
-      ask('Do you have anything that backs this up, like documents, photos, emails, or records?', { chips: [
-        { label:'Yes', go:function(){ ask('Briefly describe what you have. Please don’t send it yet; if we need it, we’ll explain how to share it safely.', {
-            placeholder:'What do you have?', onText:function(v){ tip.evidence = v; contact(); } }); } },
-        { label:'No', go:function(){ tip.evidence = 'None mentioned'; contact(); } }
-      ]});
-    }
-    function contact(){
-      ask('Last question: would you like to stay anonymous, or leave a way for us to follow up?', { chips: [
-        { label:'Stay anonymous', cls:'primary', go:function(){ tip.anonymous = true; review(); } },
-        { label:'Leave my contact info', go:function(){ tip.anonymous = false;
-            ask('What’s the best way to reach you? An email address or phone number.', { placeholder:'Email or phone…',
-              onText:function(v){ tip.contact = v; ask('And a name we can use? A first name or nickname is fine.', {
-                placeholder:'Name (optional)…', onText:function(n){ tip.name = n; review(); }, skip:function(){ review(); } }); } }); } }
-      ]});
-    }
-    function review(){
-      setInput(false); chips([]);
-      bot('Here’s your tip. Take a look before it’s sent.', function(){
-        var card = el('div','msg bot summary'); var dl = el('dl');
-        [['Topic', tip.type], ['What happened', tip.details], ['Where', tip.where], ['When', tip.when], ['Who', tip.who], ['Evidence', tip.evidence],
-         ['Your identity', tip.anonymous ? 'Anonymous' : ((tip.name ? tip.name + ' · ' : '') + tip.contact)]]
-          .forEach(function(r){ if(!r[1]) return; dl.appendChild(el('dt',null,r[0])); dl.appendChild(el('dd',null,r[1])); });
-        card.appendChild(dl); log.appendChild(card); scroll();
-        chips([
-          { label:'Send tip', cls:'primary', echo:false, go:send },
-          { label:'Add more detail', go:function(){ ask('What would you like to add?', { placeholder:'Anything else…', onText:function(v){ tip.details += '\n\nAdded: ' + v; review(); } }); } }
-        ]);
-      });
-    }
-    function ref(){ var a = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', s = ''; for(var i = 0; i < 6; i++) s += a[Math.floor(Math.random() * a.length)]; return s.slice(0,3) + '-' + s.slice(3); }
-    function send(){
-      var code = ref();
-      var t = el('div','msg bot typing','Sending securely…'); log.appendChild(t); scroll();
-      var fd = new FormData();
-      fd.append('_subject', 'New tip (' + (tip.anonymous ? 'anonymous' : 'with contact') + ') — ' + tip.type + ' — #' + code);
-      fd.append('_captcha', 'false'); fd.append('_template', 'table');
-      fd.append('Reference', code); fd.append('Topic', tip.type); fd.append('What happened', tip.details);
-      fd.append('Where', tip.where || 'Not given'); fd.append('When', tip.when || 'Not given');
-      fd.append('Who was involved', tip.who || 'Not given'); fd.append('Evidence', tip.evidence || 'Not given');
-      fd.append('Anonymous', tip.anonymous ? 'Yes' : 'No');
-      if(!tip.anonymous){ fd.append('Name', tip.name || 'Not given'); fd.append('Contact', tip.contact); if(/@/.test(tip.contact)) fd.append('_replyto', tip.contact); }
-      fetch('https://formsubmit.co/untrackedandfree@gmail.com', { method:'POST', body:fd, headers:{ 'Accept':'application/json' } })
-        .then(function(r){ if(!r.ok) throw new Error(r.status); return r; })
-        .then(function(){
-          t.remove();
-          bot('Thank you. Your tip was sent to the Alliance.\n\nYour reference number is #' + code + '. If you remember something else later, start a new tip and mention this number.', function(){
-            chips([{ label:'Send another tip', echo:false, go:start }]);
-          });
-        })
-        .catch(function(){
-          t.remove();
-          bot('That didn’t go through. Please check your connection and try again. Nothing was lost.', function(){
-            chips([{ label:'Try again', cls:'primary', echo:false, go:send }, { label:'Start over', cls:'quiet', echo:false, go:start }]);
-          });
-        });
-    }
-    restartBtn.addEventListener('click', start);
-    // Start the conversation once the tip line scrolls into view, so the typing effect is seen
-    if('IntersectionObserver' in window){
-      var started = false, io = new IntersectionObserver(function(es){ if(!started && es[0].isIntersecting){ started = true; io.disconnect(); start(); } }, { threshold:0.2 });
-      io.observe(document.getElementById('tipbot'));
-    } else start();
   })();
   wireForm('petitionForm', 'petitionStatus', 'Thank you — your signature has been added.');
   wireForm('donateForm', 'donateStatus', 'Thank you! Your details are saved, and secure checkout is opening in a new tab.', 'https://buy.stripe.com/aFa14g7HF0RP3Gk68EaEE00');
