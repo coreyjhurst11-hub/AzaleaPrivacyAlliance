@@ -254,6 +254,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .howfound-limits h4{margin:0 0 10px; font-size:1rem; color:#fff;}
   .howfound-limits ul{margin:0 0 14px; padding-left:20px; color:var(--ink-soft); font-size:0.94rem; line-height:1.6;}
   .howfound-limits li{margin-bottom:4px;}
+  .howfound-docs{display:flex; flex-wrap:wrap; gap:12px;}
+  .howfound-docs .btn-ghost-light{color:#fff; border-color:rgba(255,255,255,0.35);}
+  .howfound-docs .btn-ghost-light:hover{background:rgba(255,255,255,0.1);}
   .howfound-correct{color:#fff; font-size:0.94rem; margin:0 0 20px;}
   .hometown-ij{display:inline-block; margin-top:24px; font-size:0.9rem; font-weight:600; line-height:1.45; color:#ff7a95; text-decoration:none;}
   .hometown-ij:hover{text-decoration:underline;}
@@ -645,10 +648,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="howfound-grid">
           <ol class="howfound-steps">
-            <li><span class="step-n">1</span><div><h4>We filed an open records request</h4><p>We asked the Thomaston Police Department for its records about the Flock investigation. TPD gave us Chief Mike Richardson's email exchange with a Washington Post reporter, dated August 25, 2026. TPD blacked out the officer's name in the reporter's email before releasing it. <a href="documents/tpd-flock-washington-post-emails.pdf#page=1" target="_blank" rel="noopener">See pages 1–2 →</a></p></div></li>
+            <li><span class="step-n">1</span><div><h4>We filed an open records request</h4><p>We asked the Thomaston Police Department for its records about the Flock investigation. TPD gave us Chief Mike Richardson's email exchange with a Washington Post reporter, dated August 25, 2026. TPD blacked out the officer's name in the reporter's email before releasing it. <a href="documents/tpd-flock-washington-post-emails.pdf" target="_blank" rel="noopener">Read the emails →</a></p></div></li>
             <li><span class="step-n">2</span><div><h4>TPD left two clues unredacted</h4><p>The reporter's email still says the officer was "listed as A. Ham," and it includes a link to a public page on Have I Been Flocked: <span class="mono">haveibeenflocked.com/surveillance/542ee594</span>. TPD did not black out either one.</p></div></li>
-            <li><span class="step-n">3</span><div><h4>We opened that public page</h4><p>Have I Been Flocked publishes Flock search logs that people have obtained through public records requests. We visited the reporter's link on October 27, 2026. It shows Thomaston GA PD searching one license plate 128 times between March and June 2025, with reasons such as "SUS" and "locate veh," and it lists the operator as <strong>Anna Hammock</strong>. We printed the page exactly as it appeared. <a href="documents/tpd-flock-washington-post-emails.pdf#page=3" target="_blank" rel="noopener">See pages 3–5 →</a></p></div></li>
-            <li><span class="step-n">4</span><div><h4>We confirmed she worked for TPD</h4><p>On April 12, 2023, the Upson Beacon published a photo from TPD headlined "TPD Introduces New Officers." Its caption names Stephen Reinagel, Anna Hammock and Robert Smith as the department's newest officers. <a href="documents/tpd-flock-washington-post-emails.pdf#page=6" target="_blank" rel="noopener">See page 6 →</a></p></div></li>
+            <li><span class="step-n">3</span><div><h4>We opened that public page</h4><p>Have I Been Flocked publishes Flock search logs that people have obtained through public records requests. We visited the reporter's link on October 27, 2026. It shows Thomaston GA PD searching one license plate 128 times between March and June 2025, with reasons such as "SUS" and "locate veh," and it lists the operator as <strong>Anna Hammock</strong>. We saved the page exactly as it appeared. <a href="documents/have-i-been-flocked-542ee594.pdf" target="_blank" rel="noopener">See the Have I Been Flocked data →</a></p></div></li>
+            <li><span class="step-n">4</span><div><h4>We confirmed she worked for TPD</h4><p>On April 12, 2023, the Upson Beacon published a photo from TPD headlined "TPD Introduces New Officers." Its caption names Stephen Reinagel, Anna Hammock and Robert Smith as the department's newest officers. <a href="documents/tpd-new-officers-upson-beacon-2023.pdf" target="_blank" rel="noopener">See the Beacon page →</a></p></div></li>
           </ol>
           <figure class="howfound-photo">
             <div class="photo-frame">
@@ -666,7 +669,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>All misconduct described here is alleged. All persons and parties are presumed innocent until proven guilty.</li>
           </ul>
           <p class="howfound-correct">If anything on this page is wrong, <a href="#contact">tell us</a> and we will correct it promptly and say so publicly.</p>
-          <a class="btn btn-primary" href="documents/tpd-flock-washington-post-emails.pdf" target="_blank" rel="noopener">Open the full records (6 pages)</a>
+          <div class="howfound-docs">
+            <a class="btn btn-primary" href="documents/tpd-flock-washington-post-emails.pdf" target="_blank" rel="noopener">TPD–Washington Post emails</a>
+            <a class="btn btn-ghost-light" href="documents/have-i-been-flocked-542ee594.pdf" target="_blank" rel="noopener">Have I Been Flocked data</a>
+            <a class="btn btn-ghost-light" href="documents/tpd-new-officers-upson-beacon-2023.pdf" target="_blank" rel="noopener">2023 Beacon photo</a>
+          </div>
         </div>
       </section>
     </div>
